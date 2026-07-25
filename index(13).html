@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kopi Ruang Kita | Kafe Santai di Kota Jambi</title>
+  <meta
+    name="description"
+    content="Kopi Ruang Kita adalah tempat ngopi, belajar, mengerjakan tugas, dan berkumpul bersama teman di Kota Jambi."
+  >
+
+  <!-- Mempercepat koneksi menuju penyedia gambar dan Google Maps -->
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://www.google.com">
+
+  <style>
+    /* =========================
+       VARIABEL WARNA DAN DASAR
+       ========================= */
+    :root {
+      --coffee-dark: #2f1b12;
+      --coffee: #6f4e37;
+      --coffee-light: #a47148;
+      --cream: #f5eadb;
+      --cream-soft: #fffaf4;
+      --white: #ffffff;
+      --black: #161616;
+      --muted: #6b625d;
+      --border: rgba(47, 27, 18, 0.12);
+      --shadow: 0 18px 45px rgba(47, 27, 18, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--black);
+      background: var(--cream-soft);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    section {
+      padding: 92px 0;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin-inline: auto;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--coffee);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--coffee-light);
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--coffee-dark);
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      letter-spacing: -0.055em;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease,
+        background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--coffee);
+      box-shadow: 0 12px 25px rgba(111, 78, 55, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--coffee-dark);
+    }
+
+    .btn-light {
+      color: var(--coffee-dark);
+      background: var(--white);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .btn-outline-light {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-outline-light:hover {
+      color: var(--coffee-dark);
+      background: var(--white);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      fill: currentColor;
+    }
+
+    /* =========================
+       HEADER DAN NAVIGASI
+       ========================= */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s ease, border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(255, 250, 244, 0.94);
+      border-color: var(--border);
+      box-shadow: 0 10px 30px rgba(47, 27, 18, 0.08);
+      backdrop-filter: blur(15px);
+    }
+
+    .navbar {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--white);
+      font-size: 1.16rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .site-header.scrolled .brand {
+      color: var(--coffee-dark);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--coffee-dark);
+      background: var(--cream);
+      box-shadow: 0 8px 18px rgba(47, 27, 18, 0.15);
+    }
+
+    .brand-mark svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .nav-panel {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 10px 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.94rem;
+      font-weight: 700;
+      transition: color 0.25s ease;
+    }
+
+    .site-header.scrolled .nav-links a {
+      color: var(--coffee-dark);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      left: 0;
+      height: 2px;
+      border-radius: 99px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .header-order {
+      color: var(--coffee-dark);
+      background: var(--cream);
+    }
+
+    .site-header.scrolled .header-order {
+      color: var(--white);
+      background: var(--coffee);
+    }
+
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      display: none;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+    }
+
+    .site-header.scrolled .menu-toggle {
+      color: var(--coffee-dark);
+      background: var(--white);
+      border-color: var(--border);
+    }
+
+    .menu-toggle span,
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      width: 21px;
+      height: 2px;
+      display: block;
+      border-radius: 99px;
+      background: currentColor;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .menu-toggle span {
+      position: relative;
+    }
+
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-toggle span::before {
+      top: -7px;
+    }
+
+    .menu-toggle span::after {
+      top: 7px;
+    }
+
+    .menu-toggle.active span {
+      background: transparent;
+    }
+
+    .menu-toggle.active span::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle.active span::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    /* =========================
+       HERO / BERANDA
+       ========================= */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 140px 0 90px;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(31, 18, 12, 0.9) 0%, rgba(31, 18, 12, 0.63) 50%, rgba(31, 18, 12, 0.25) 100%),
+        url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=2000&q=85")
+        center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 160px;
+      background: linear-gradient(transparent, rgba(47, 27, 18, 0.34));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+    }
+
+    .hero .eyebrow {
+      color: var(--cream);
+    }
+
+    .hero .eyebrow::before {
+      background: var(--cream);
+    }
+
+    .hero h1 {
+      color: var(--white);
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 24px 0 32px;
+      color: rgba(255, 255, 255, 0.87);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 45px;
+    }
+
+    .hero-highlight {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 10px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .hero-highlight .icon {
+      color: var(--cream);
+    }
+
+    /* =========================
+       TENTANG
+       ========================= */
+    .about {
+      background: var(--cream-soft);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: center;
+      gap: 68px;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      height: 570px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .about-badge {
+      position: absolute;
+      right: -22px;
+      bottom: 32px;
+      width: 156px;
+      height: 156px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border: 8px solid var(--cream-soft);
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--coffee);
+      text-align: center;
+      box-shadow: 0 16px 30px rgba(47, 27, 18, 0.22);
+    }
+
+    .about-badge strong {
+      display: block;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .about-badge span {
+      display: block;
+      margin-top: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .about-text > p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .features {
+      display: grid;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 17px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .feature:hover {
+      transform: translateX(6px);
+      box-shadow: 0 14px 30px rgba(47, 27, 18, 0.08);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--coffee);
+      background: var(--cream);
+    }
+
+    .feature h3 {
+      margin-bottom: 2px;
+      font-size: 1rem;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* =========================
+       MENU
+       ========================= */
+    .menu-section {
+      background: var(--cream);
+    }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .menu-tab {
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid rgba(47, 27, 18, 0.15);
+      border-radius: 999px;
+      color: var(--coffee-dark);
+      background: rgba(255, 255, 255, 0.55);
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .menu-tab.active,
+    .menu-tab:hover {
+      color: var(--white);
+      background: var(--coffee);
+      border-color: var(--coffee);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .menu-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid rgba(47, 27, 18, 0.1);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 12px 30px rgba(47, 27, 18, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 38px rgba(47, 27, 18, 0.12);
+    }
+
+    .menu-card.hidden {
+      display: none;
+    }
+
+    .menu-thumb {
+      width: 108px;
+      height: 108px;
+      flex: 0 0 auto;
+      overflow: hidden;
+      border-radius: 18px;
+      background: var(--cream);
+    }
+
+    .menu-thumb img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .menu-card:hover .menu-thumb img {
+      transform: scale(1.08);
+    }
+
+    .menu-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .menu-info h3 {
+      margin-bottom: 5px;
+      font-size: 1.08rem;
+    }
+
+    .menu-info p {
+      margin-bottom: 11px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .menu-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .price {
+      color: var(--coffee);
+      font-weight: 900;
+    }
+
+    .order-button {
+      min-height: 38px;
+      padding: 0 15px;
+      border: none;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--coffee);
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .order-button:hover {
+      transform: translateY(-2px);
+      background: var(--coffee-dark);
+    }
+
+    /* =========================
+       GALERI
+       ========================= */
+    .gallery {
+      background: var(--cream-soft);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 210px;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      box-shadow: 0 12px 28px rgba(47, 27, 18, 0.08);
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: span 7;
+      grid-row: span 2;
+    }
+
+    .gallery-item:nth-child(2) {
+      grid-column: span 5;
+    }
+
+    .gallery-item:nth-child(3) {
+      grid-column: span 5;
+    }
+
+    .gallery-item:nth-child(4),
+    .gallery-item:nth-child(5),
+    .gallery-item:nth-child(6) {
+      grid-column: span 4;
+    }
+
+    .gallery-item img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease, filter 0.55s ease;
+    }
+
+    .gallery-item::after {
+      content: attr(data-caption);
+      position: absolute;
+      inset: auto 14px 14px;
+      padding: 10px 13px;
+      border-radius: 12px;
+      color: var(--white);
+      background: rgba(31, 18, 12, 0.7);
+      backdrop-filter: blur(8px);
+      font-size: 0.84rem;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.07);
+      filter: brightness(0.84);
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       KONTAK
+       ========================= */
+    .contact {
+      color: var(--white);
+      background: var(--coffee-dark);
+    }
+
+    .contact h2,
+    .contact h3 {
+      color: var(--white);
+    }
+
+    .contact .section-heading p,
+    .contact .eyebrow {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .contact .eyebrow::before {
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .contact-card,
+    .map-card {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .contact-card {
+      padding: 32px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 16px;
+      margin: 26px 0 30px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .contact-item-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--coffee-dark);
+      background: var(--cream);
+    }
+
+    .contact-item span {
+      display: block;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.78rem;
+    }
+
+    .contact-item strong,
+    .contact-item a {
+      color: var(--white);
+      font-size: 0.96rem;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      display: block;
+      border: 0;
+      filter: grayscale(0.15) contrast(0.95);
+    }
+
+    /* =========================
+       FOOTER DAN TOMBOL MELAYANG
+       ========================= */
+    footer {
+      padding: 26px 0;
+      color: rgba(255, 255, 255, 0.74);
+      background: #1f120c;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.06);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-3px);
+      background: var(--coffee);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 800;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: #25d366;
+      box-shadow: 0 16px 30px rgba(37, 211, 102, 0.33);
+      transition: transform 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-5px) scale(1.03);
+    }
+
+    .whatsapp-float .icon {
+      width: 29px;
+      height: 29px;
+    }
+
+    /* =========================
+       ANIMASI SAAT DIGULIR
+       ========================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.08s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.16s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.24s;
+    }
+
+    /* =========================
+       TAMPILAN TABLET
+       ========================= */
+    @media (max-width: 980px) {
+      .menu-toggle {
+        display: grid;
+      }
+
+      .nav-panel {
+        position: fixed;
+        inset: 82px 0 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+        padding: 28px 24px 40px;
+        background: rgba(255, 250, 244, 0.98);
+        backdrop-filter: blur(15px);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-panel.open {
+        transform: translateX(0);
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 14px 5px;
+        border-bottom: 1px solid var(--border);
+        color: var(--coffee-dark);
+        font-size: 1.05rem;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .header-order {
+        width: 100%;
+        color: var(--white);
+        background: var(--coffee);
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        max-width: 700px;
+      }
+
+      .about-image img {
+        height: 500px;
+      }
+
+      .about-badge {
+        right: 18px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .map-card iframe {
+        min-height: 430px;
+      }
+    }
+
+    /* =========================
+       TAMPILAN TELEPON SELULER
+       ========================= */
+    @media (max-width: 680px) {
+      section {
+        padding: 72px 0;
+      }
+
+      .container {
+        width: min(calc(100% - 28px), var(--container));
+      }
+
+      .navbar {
+        min-height: 74px;
+      }
+
+      .nav-panel {
+        inset: 74px 0 0;
+      }
+
+      .brand {
+        font-size: 1rem;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hero {
+        min-height: 760px;
+        padding: 122px 0 74px;
+        background-position: 61% center;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(31, 18, 12, 0.25);
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-highlights {
+        gap: 9px;
+        margin-top: 32px;
+      }
+
+      .hero-highlight {
+        min-height: 44px;
+        font-size: 0.8rem;
+      }
+
+      .about-grid {
+        gap: 42px;
+      }
+
+      .about-image img {
+        height: 390px;
+      }
+
+      .about-badge {
+        right: 12px;
+        bottom: 14px;
+        width: 125px;
+        height: 125px;
+        border-width: 6px;
+      }
+
+      .about-badge strong {
+        font-size: 1.45rem;
+      }
+
+      .menu-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .menu-tab {
+        padding: 0 10px;
+        font-size: 0.82rem;
+      }
+
+      .menu-card {
+        align-items: flex-start;
+        padding: 15px;
+      }
+
+      .menu-thumb {
+        width: 86px;
+        height: 100px;
+      }
+
+      .menu-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .order-button {
+        width: 100%;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 245px;
+      }
+
+      .gallery-item,
+      .gallery-item:nth-child(n) {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .gallery-item::after {
+        opacity: 1;
+        transform: none;
+      }
+
+      .contact-card {
+        padding: 24px 20px;
+      }
+
+      .contact-actions .btn {
+        width: 100%;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .whatsapp-float {
+        right: 15px;
+        bottom: 15px;
+        width: 54px;
+        height: 54px;
+      }
+    }
+
+    /* Mengurangi animasi bagi pengguna yang memilih gerakan minimal */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header utama -->
+  <header class="site-header" id="siteHeader">
+    <div class="container navbar">
+      <a class="brand" href="#beranda" aria-label="Kembali ke beranda">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V6h15v2Zm0 2v2h1a1 1 0 0 0 0-2h-1ZM5 8v7a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8H5Zm2-6h2v3H7V2Zm4 0h2v3h-2V2Z"/>
+          </svg>
+        </span>
+        <span>Kopi Ruang Kita</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="navPanel"
+      >
+        <span></span>
+      </button>
+
+      <nav class="nav-panel" id="navPanel" aria-label="Navigasi utama">
+        <ul class="nav-links">
+          <li><a href="#beranda" class="active">Beranda</a></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+
+        <a
+          class="btn header-order"
+          href="https://wa.me/6281334092182?text=Halo%20Kopi%20Ruang%20Kita%2C%20saya%20ingin%20melakukan%20pemesanan."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pesan Sekarang
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Bagian beranda -->
+    <section class="hero" id="beranda">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow reveal">Kafe santai di Kota Jambi</span>
+
+          <h1 class="reveal delay-1">
+            Tempat Ngopi, Nongkrong, dan Cerita
+          </h1>
+
+          <p class="hero-description reveal delay-2">
+            Nikmati kopi pilihan, makanan ringan, dan suasana nyaman untuk
+            menghabiskan waktu bersama teman.
+          </p>
+
+          <div class="hero-actions reveal delay-3">
+            <a class="btn btn-light" href="#menu">Lihat Menu</a>
+
+            <a
+              class="btn btn-outline-light"
+              href="https://wa.me/6281334092182?text=Halo%20Kopi%20Ruang%20Kita%2C%20saya%20ingin%20melihat%20dan%20memesan%20menu."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.52 3.48A11.82 11.82 0 0 0 12.07 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.59 5.96L.05 24l6.25-1.64a11.9 11.9 0 0 0 5.76 1.47h.01C18.65 23.83 24 18.48 24 11.9c0-3.18-1.24-6.17-3.48-8.42ZM12.07 21.82h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.71.98.99-3.62-.23-.37a9.87 9.87 0 0 1-1.52-5.29c0-5.47 4.44-9.92 9.9-9.92a9.84 9.84 0 0 1 7.02 2.91 9.85 9.85 0 0 1 2.9 7.01c-.01 5.46-4.46 9.9-9.95 9.9Zm5.43-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47a8.95 8.95 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.71.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/>
+              </svg>
+              Pesan via WhatsApp
+            </a>
+          </div>
+
+          <div class="hero-highlights reveal delay-3">
+            <div class="hero-highlight">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7V2Zm1 0v10h9A10 10 0 0 0 13 2Zm2 2.3A8.02 8.02 0 0 1 19.7 10H15V4.3Z"/>
+              </svg>
+              Buka setiap hari
+            </div>
+
+            <div class="hero-highlight">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3C7.8 3 4.1 4.7 1.4 7.4L12 18 22.6 7.4A14.94 14.94 0 0 0 12 3Zm0 4c2.9 0 5.5 1.1 7.5 2.9l-1.4 1.4A8.91 8.91 0 0 0 12 9a8.91 8.91 0 0 0-6.1 2.3L4.5 9.9A10.93 10.93 0 0 1 12 7Zm0 4c1.8 0 3.4.7 4.7 1.8L12 17.5l-4.7-4.7A6.95 6.95 0 0 1 12 11Zm0 9.3 1.4 1.4L12 23l-1.4-1.3 1.4-1.4Z"/>
+              </svg>
+              WiFi gratis
+            </div>
+
+            <div class="hero-highlight">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 4V2h10v2h3a2 2 0 0 1 2 2v14H2V6a2 2 0 0 1 2-2h3Zm2 0h6V2H9v2ZM4 6v12h16V6H4Zm6 3h4v2h-4V9Zm-3 4h10v2H7v-2Z"/>
+              </svg>
+              Cocok untuk belajar
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bagian tentang kafe -->
+    <section class="about" id="tentang">
+      <div class="container about-grid">
+        <div class="about-image reveal">
+          <img
+            src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=85"
+            alt="Interior kafe dengan suasana hangat dan nyaman"
+            loading="lazy"
+          >
+
+          <div class="about-badge">
+            <div>
+              <strong>09.00</strong>
+              <span>Buka sampai pukul 23.00 WIB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <div class="section-heading reveal">
+            <span class="eyebrow">Tentang kami</span>
+            <h2>Ruang nyaman untuk setiap cerita</h2>
+          </div>
+
+          <p class="reveal delay-1">
+            Kopi Ruang Kita merupakan kafe yang menghadirkan suasana nyaman,
+            modern, dan ramah untuk Generasi Z. Tempat ini cocok untuk
+            bersantai, belajar, mengerjakan tugas, dan berkumpul bersama teman.
+          </p>
+
+          <div class="features">
+            <article class="feature reveal delay-1">
+              <div class="feature-icon">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 3h16a2 2 0 0 1 2 2v6a4 4 0 0 1-4 4h-1v4h3v2H4v-2h3v-4H6a4 4 0 0 1-4-4V5a2 2 0 0 1 2-2Zm0 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5H4Zm5 10v4h6v-4H9Z"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Tempat nyaman</h3>
+                <p>Interior hangat dengan area duduk untuk santai dan belajar.</p>
+              </div>
+            </article>
+
+            <article class="feature reveal delay-2">
+              <div class="feature-icon">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 1a7 7 0 0 1 7 7v1h2v12H3V9h2V8a7 7 0 0 1 7-7Zm5 8V8A5 5 0 0 0 7 8v1h10ZM5 11v8h14v-8H5Zm6 2h2v4h-2v-4Z"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Harga terjangkau</h3>
+                <p>Pilihan menu ramah kantong untuk mahasiswa dan pekerja muda.</p>
+              </div>
+            </article>
+
+            <article class="feature reveal delay-3">
+              <div class="feature-icon">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3C7.8 3 4.1 4.7 1.4 7.4L12 18 22.6 7.4A14.94 14.94 0 0 0 12 3Zm0 4c2.9 0 5.5 1.1 7.5 2.9l-1.4 1.4A8.91 8.91 0 0 0 12 9a8.91 8.91 0 0 0-6.1 2.3L4.5 9.9A10.93 10.93 0 0 1 12 7Zm0 4c1.8 0 3.4.7 4.7 1.8L12 17.5l-4.7-4.7A6.95 6.95 0 0 1 12 11Zm0 9.3 1.4 1.4L12 23l-1.4-1.3 1.4-1.4Z"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Tersedia WiFi gratis</h3>
+                <p>Tetap terhubung saat mengerjakan tugas atau bekerja.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bagian daftar menu -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="eyebrow">Pilihan favorit</span>
+          <h2>Menu Kopi Ruang Kita</h2>
+          <p>
+            Pilih minuman atau makanan favorit, lalu pesan langsung melalui
+            WhatsApp.
+          </p>
+        </div>
+
+        <div class="menu-tabs reveal delay-1" role="tablist" aria-label="Kategori menu">
+          <button class="menu-tab active" type="button" data-filter="semua">Semua</button>
+          <button class="menu-tab" type="button" data-filter="minuman">Minuman</button>
+          <button class="menu-tab" type="button" data-filter="makanan">Makanan</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+          <article class="menu-card reveal" data-category="minuman">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=500&q=80"
+                alt="Es Kopi Susu Ruang Kita"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Es Kopi Susu Ruang Kita</h3>
+              <p>Espresso, susu segar, dan gula aren dengan rasa lembut.</p>
+              <div class="menu-footer">
+                <span class="price">Rp18.000</span>
+                <button class="order-button" type="button" data-menu="Es Kopi Susu Ruang Kita">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal delay-1" data-category="minuman">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80"
+                alt="Americano"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Americano</h3>
+              <p>Espresso klasik dengan air panas, ringan dan beraroma.</p>
+              <div class="menu-footer">
+                <span class="price">Rp15.000</span>
+                <button class="order-button" type="button" data-menu="Americano">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" data-category="minuman">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=500&q=80"
+                alt="Cappuccino"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Cappuccino</h3>
+              <p>Perpaduan espresso, susu hangat, dan busa susu lembut.</p>
+              <div class="menu-footer">
+                <span class="price">Rp20.000</span>
+                <button class="order-button" type="button" data-menu="Cappuccino">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal delay-1" data-category="minuman">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=500&q=80"
+                alt="Matcha Latte"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Matcha Latte</h3>
+              <p>Matcha premium dan susu segar dengan rasa manis seimbang.</p>
+              <div class="menu-footer">
+                <span class="price">Rp22.000</span>
+                <button class="order-button" type="button" data-menu="Matcha Latte">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" data-category="minuman">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1517578239113-b03992dcdd25?auto=format&fit=crop&w=500&q=80"
+                alt="Chocolate Latte"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Chocolate Latte</h3>
+              <p>Cokelat pekat dan susu lembut, cocok dinikmati kapan saja.</p>
+              <div class="menu-footer">
+                <span class="price">Rp20.000</span>
+                <button class="order-button" type="button" data-menu="Chocolate Latte">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal delay-1" data-category="minuman">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=500&q=80"
+                alt="Lemon Tea"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Lemon Tea</h3>
+              <p>Teh menyegarkan dengan sentuhan lemon yang ringan.</p>
+              <div class="menu-footer">
+                <span class="price">Rp15.000</span>
+                <button class="order-button" type="button" data-menu="Lemon Tea">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" data-category="makanan">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=80"
+                alt="Kentang Goreng"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Kentang Goreng</h3>
+              <p>Kentang renyah dengan pilihan saus untuk teman nongkrong.</p>
+              <div class="menu-footer">
+                <span class="price">Rp15.000</span>
+                <button class="order-button" type="button" data-menu="Kentang Goreng">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal delay-1" data-category="makanan">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?auto=format&fit=crop&w=500&q=80"
+                alt="Roti Bakar Cokelat"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Roti Bakar Cokelat</h3>
+              <p>Roti panggang hangat dengan isian cokelat yang melimpah.</p>
+              <div class="menu-footer">
+                <span class="price">Rp18.000</span>
+                <button class="order-button" type="button" data-menu="Roti Bakar Cokelat">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" data-category="makanan">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80"
+                alt="Pisang Goreng"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Pisang Goreng</h3>
+              <p>Pisang goreng hangat dengan tekstur renyah dan rasa manis.</p>
+              <div class="menu-footer">
+                <span class="price">Rp15.000</span>
+                <button class="order-button" type="button" data-menu="Pisang Goreng">Pesan</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal delay-1" data-category="makanan">
+            <div class="menu-thumb">
+              <img
+                src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=500&q=80"
+                alt="Nasi Ayam Sambal Matah"
+                loading="lazy"
+              >
+            </div>
+            <div class="menu-info">
+              <h3>Nasi Ayam Sambal Matah</h3>
+              <p>Nasi hangat, ayam gurih, dan sambal matah segar.</p>
+              <div class="menu-footer">
+                <span class="price">Rp25.000</span>
+                <button class="order-button" type="button" data-menu="Nasi Ayam Sambal Matah">Pesan</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bagian galeri -->
+    <section class="gallery" id="galeri">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <span class="eyebrow">Suasana kami</span>
+          <h2>Galeri Kopi Ruang Kita</h2>
+          <p>
+            Sudut nyaman, minuman menarik, dan suasana yang cocok untuk
+            menikmati waktu bersama.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item reveal" data-caption="Suasana kafe yang hangat">
+            <img
+              src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1400&q=85"
+              alt="Suasana interior kafe"
+              loading="lazy"
+            >
+          </figure>
+
+          <figure class="gallery-item reveal delay-1" data-caption="Kopi pilihan setiap hari">
+            <img
+              src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=900&q=85"
+              alt="Secangkir kopi di atas meja"
+              loading="lazy"
+            >
+          </figure>
+
+          <figure class="gallery-item reveal delay-2" data-caption="Tempat duduk yang nyaman">
+            <img
+              src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=85"
+              alt="Area tempat duduk kafe"
+              loading="lazy"
+            >
+          </figure>
+
+          <figure class="gallery-item reveal" data-caption="Camilan untuk teman ngobrol">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=85"
+              alt="Makanan dan minuman di meja kafe"
+              loading="lazy"
+            >
+          </figure>
+
+          <figure class="gallery-item reveal delay-1" data-caption="Nyaman untuk belajar">
+            <img
+              src="https://images.unsplash.com/photo-1511081692775-05d0f180a065?auto=format&fit=crop&w=900&q=85"
+              alt="Pengunjung mengerjakan tugas di kafe"
+              loading="lazy"
+            >
+          </figure>
+
+          <figure class="gallery-item reveal delay-2" data-caption="Waktu bersama teman">
+            <img
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85"
+              alt="Sekelompok teman sedang berkumpul"
+              loading="lazy"
+            >
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bagian kontak dan peta -->
+    <section class="contact" id="kontak">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Kunjungi kami</span>
+          <h2>Temukan ruang nyamanmu</h2>
+          <p>
+            Datang langsung atau hubungi kami melalui WhatsApp untuk melakukan
+            pemesanan.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Kopi Ruang Kita</h3>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 1a8 8 0 0 1 8 8c0 5.5-8 14-8 14S4 14.5 4 9a8 8 0 0 1 8-8Zm0 2a6 6 0 0 0-6 6c0 3.5 3.9 8.8 6 11.3 2.1-2.5 6-7.8 6-11.3a6 6 0 0 0-6-6Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <span>Alamat</span>
+                  <strong>Jl. Sudirman No. 25, Kota Jambi</strong>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.52 3.48A11.82 11.82 0 0 0 12.07 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.59 5.96L.05 24l6.25-1.64a11.9 11.9 0 0 0 5.76 1.47h.01C18.65 23.83 24 18.48 24 11.9c0-3.18-1.24-6.17-3.48-8.42ZM12.07 21.82h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.71.98.99-3.62-.23-.37a9.87 9.87 0 0 1-1.52-5.29c0-5.47 4.44-9.92 9.9-9.92a9.84 9.84 0 0 1 7.02 2.91 9.85 9.85 0 0 1 2.9 7.01c-.01 5.46-4.46 9.9-9.95 9.9Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <span>WhatsApp</span>
+                  <a href="https://wa.me/6281334092182" target="_blank" rel="noopener noreferrer">
+                    +62 813 3409 2182
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <span>Instagram</span>
+                  <a href="https://www.instagram.com/kopiruangkita" target="_blank" rel="noopener noreferrer">
+                    @kopiruangkita
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm1 2v5.6l3.7 2.1-1 1.7-4.7-2.8V6h2Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <span>Jam operasional</span>
+                  <strong>Senin–Minggu, pukul 09.00–23.00 WIB</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-actions">
+              <a
+                class="btn btn-light"
+                href="https://wa.me/6281334092182?text=Halo%20Kopi%20Ruang%20Kita%2C%20saya%20ingin%20melakukan%20pemesanan."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hubungi via WhatsApp
+              </a>
+
+              <a
+                class="btn btn-outline-light"
+                href="https://www.google.com/maps/search/?api=1&query=Jl.%20Sudirman%20No.%2025%2C%20Kota%20Jambi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buka Peta
+              </a>
+            </div>
+          </div>
+
+          <div class="map-card reveal delay-1">
+            <iframe
+              title="Peta lokasi Kopi Ruang Kita"
+              src="https://www.google.com/maps?q=Jl.%20Sudirman%20No.%2025%2C%20Kota%20Jambi&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <p>© 2026 Kopi Ruang Kita. Dibuat untuk tugas kuliah.</p>
+
+      <div class="social-links" aria-label="Tautan media sosial">
+        <a
+          class="social-link"
+          href="https://wa.me/6281334092182"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp Kopi Ruang Kita"
+        >
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.52 3.48A11.82 11.82 0 0 0 12.07 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.59 5.96L.05 24l6.25-1.64a11.9 11.9 0 0 0 5.76 1.47h.01C18.65 23.83 24 18.48 24 11.9c0-3.18-1.24-6.17-3.48-8.42Z"/>
+          </svg>
+        </a>
+
+        <a
+          class="social-link"
+          href="https://www.instagram.com/kopiruangkita"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram Kopi Ruang Kita"
+        >
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tombol WhatsApp melayang -->
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/6281334092182?text=Halo%20Kopi%20Ruang%20Kita%2C%20saya%20ingin%20melakukan%20pemesanan."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Pesan melalui WhatsApp"
+  >
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.52 3.48A11.82 11.82 0 0 0 12.07 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.59 5.96L.05 24l6.25-1.64a11.9 11.9 0 0 0 5.76 1.47h.01C18.65 23.83 24 18.48 24 11.9c0-3.18-1.24-6.17-3.48-8.42ZM12.07 21.82h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.71.98.99-3.62-.23-.37a9.87 9.87 0 0 1-1.52-5.29c0-5.47 4.44-9.92 9.9-9.92a9.84 9.84 0 0 1 7.02 2.91 9.85 9.85 0 0 1 2.9 7.01c-.01 5.46-4.46 9.9-9.95 9.9Zm5.43-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47a8.95 8.95 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.71.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/>
+    </svg>
+  </a>
+
+  <script>
+    /* =========================
+       KONFIGURASI DASAR
+       ========================= */
+    const whatsappNumber = "6281334092182";
+
+    const siteHeader = document.getElementById("siteHeader");
+    const menuToggle = document.getElementById("menuToggle");
+    const navPanel = document.getElementById("navPanel");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const sections = document.querySelectorAll("main section[id]");
+
+    /* Menambahkan latar header setelah halaman digulir */
+    function updateHeader() {
+      siteHeader.classList.toggle("scrolled", window.scrollY > 30);
+    }
+
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+
+    /* Membuka dan menutup navigasi pada telepon seluler */
+    function closeMobileMenu() {
+      navPanel.classList.remove("open");
+      menuToggle.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navPanel.classList.toggle("open");
+      menuToggle.classList.toggle("active", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("menu-open", isOpen);
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 980) {
+        closeMobileMenu();
+      }
+    });
+
+    /* Menandai menu navigasi sesuai bagian yang sedang terlihat */
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          navLinks.forEach((link) => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${entry.target.id}`
+            );
+          });
+        });
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0
+      }
+    );
+
+    sections.forEach((section) => sectionObserver.observe(section));
+
+    /* Menampilkan animasi ringan ketika elemen masuk ke layar */
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    /* Membuka WhatsApp dengan nama menu yang dipilih */
+    document.querySelectorAll(".order-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const menuName = button.dataset.menu;
+        const message =
+          `Halo Kopi Ruang Kita, saya ingin memesan ${menuName}.`;
+        const whatsappUrl =
+          `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      });
+    });
+
+    /* Menyaring menu berdasarkan kategori */
+    const menuTabs = document.querySelectorAll(".menu-tab");
+    const menuCards = document.querySelectorAll(".menu-card");
+
+    menuTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const filter = tab.dataset.filter;
+
+        menuTabs.forEach((item) => item.classList.remove("active"));
+        tab.classList.add("active");
+
+        menuCards.forEach((card) => {
+          const shouldShow =
+            filter === "semua" || card.dataset.category === filter;
+          card.classList.toggle("hidden", !shouldShow);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
